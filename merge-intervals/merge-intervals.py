@@ -17,7 +17,6 @@ class Solution:
             elif curr_end >= intervals[i][0] and curr_end <= intervals[i][1]:
                 curr_end = intervals[i][1]
         
-        if curr_start != -1:
-            ans.append([curr_start, curr_end])
+        ans.append([curr_start, curr_end])
         
         return ans
