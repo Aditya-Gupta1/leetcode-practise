@@ -7,16 +7,11 @@
 class Solution:
     def isUnivalTree(self, root: Optional[TreeNode]) -> bool:
         if not root: return True
-        if not root.right and not root.left: return True
-        left, right = True, True
-        if root.left:
-            if  root.left.val == root.val:
-                left = self.isUnivalTree(root.left)
-            else:
-                return False
-        if root.right:
-            if root.right.val == root.val:
-                right = self.isUnivalTree(root.right)
-            else:
-                return False
-        return left and right
+        value = root.val
+        que = [root]
+        while len(que) > 0:
+            node = que.pop(0)
+            if node.val != value: return False
+            if node.left: que.append(node.left)
+            if node.right: que.append(node.right)
+        return True
