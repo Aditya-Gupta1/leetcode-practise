@@ -18,9 +18,21 @@ class Solution:
         # return maxProduct
         
         # approach 2
-        char_set = [set(word) for word in words]
+        # char_set = [set(word) for word in words]
+        # for i in range(n):
+        #     for j in range(i+1, n):
+        #         if not char_set[i] & char_set[j]:
+        #             maxProduct = max(maxProduct, len(words[i])*len(words[j]))
+        # return maxProduct
+        
+        # approach 3
+        bit_mask = [0 for i in range(n)]
+        for i in range(n):
+            for ch in words[i]:
+                bit_mask[i] |= 1 << (ord(ch) - ord('a'))
+        
         for i in range(n):
             for j in range(i+1, n):
-                if not char_set[i] & char_set[j]:
+                if not bit_mask[i] & bit_mask[j]:
                     maxProduct = max(maxProduct, len(words[i])*len(words[j]))
         return maxProduct
