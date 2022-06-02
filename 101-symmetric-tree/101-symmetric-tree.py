@@ -15,5 +15,24 @@ class Solution:
         return False
     
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
-        if not root or (not root.left and not root.right): return True
-        return self.check(root.left, root.right)
+        # DFS
+        # if not root or (not root.left and not root.right): return True
+        # return self.check(root.left, root.right)
+        
+        # BFS
+        
+        que = [[root, root]]
+        while len(que) > 0:
+            size = len(que)
+            for _ in range(size):
+                nodes = que.pop(0)
+                if nodes[0].val != nodes[1].val: return False
+                if nodes[0].left:
+                    if nodes[1].right:
+                        que.append([nodes[0].left, nodes[1].right])
+                    else: return False
+                if nodes[0].right:
+                    if nodes[1].left:
+                        que.append([nodes[0].right, nodes[1].left])
+                    else: return False
+        return True
