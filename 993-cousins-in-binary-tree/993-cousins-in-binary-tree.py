@@ -14,10 +14,31 @@ class Solution:
         return self.helper(root.right, depth+1, root.val, target)
     
     def isCousins(self, root: Optional[TreeNode], x: int, y: int) -> bool:
-        if root.val == x or root.val == y: return False
+        # DFS
+#         if root.val == x or root.val == y: return False
         
-        xDepth, xParent = self.helper(root, 0, -1, x)
-        yDepth, yParent = self.helper(root, 0, -1, y)
+#         xDepth, xParent = self.helper(root, 0, -1, x)
+#         yDepth, yParent = self.helper(root, 0, -1, y)
         
-        if xDepth == yDepth and xParent != yParent: return True
+#         if xDepth == yDepth and xParent != yParent: return True
+#         return False
+        
+        # BFS
+        
+        if not root or root.val == x or root.val == y: return False
+        que = [root]
+        while len(que) > 0:
+            currSize = len(que)
+            xExists = False
+            yExists = False
+            for _ in range(currSize):
+                node = que.pop(0)
+                if node.val == x: xExists = True
+                if node.val == y: yExists = True
+                if node.left and node.right:
+                    if set([node.left.val, node.right.val]) == set([x, y]):
+                        return False
+                if node.left: que.append(node.left)
+                if node.right: que.append(node.right)
+            if xExists and yExists: return True
         return False
