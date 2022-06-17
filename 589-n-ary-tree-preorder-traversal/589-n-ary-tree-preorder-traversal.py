@@ -21,6 +21,5 @@ class Solution:
         while len(stk) > 0:
             node = stk.pop()
             ans.append(node.val)
-            for child in reversed(node.children):
-                stk.append(child)
+            stk.extend(reversed(node.children))
         return ans
