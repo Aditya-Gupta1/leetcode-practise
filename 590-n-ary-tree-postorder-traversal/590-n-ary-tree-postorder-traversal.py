@@ -7,13 +7,9 @@ class Node:
 """
 
 class Solution:
-    
-    def traverse(self, root):
-        if root:
-            for child in root.children:
-                yield from self.traverse(child)
-            yield root.val
-            
             
     def postorder(self, root: 'Node') -> List[int]:
-        return self.traverse(root)
+        if root:
+            for child in root.children:
+                yield from self.postorder(child)
+            yield root.val
