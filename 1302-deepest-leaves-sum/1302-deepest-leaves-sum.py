@@ -15,19 +15,28 @@ class Solution:
         return max(left, right)+1
     
     def deepestLeavesSum(self, root: Optional[TreeNode]) -> int:
-        height = self.height(root)
-        total = 0
-        que = [root]
-        tempHeight = 0
+        # approach-1: brute-force
+#         height = self.height(root)
+#         total = 0
+#         que = [root]
+#         tempHeight = 0
         
-        while que:
-            tempHeight += 1
-            currSize = len(que)
+#         while que:
+#             tempHeight += 1
+#             currSize = len(que)
             
-            for _ in range(currSize):
-                node = que.pop(0)
-                if tempHeight == height: total += node.val
-                if node.left: que.append(node.left)
-                if node.right: que.append(node.right)
+#             for _ in range(currSize):
+#                 node = que.pop(0)
+#                 if tempHeight == height: total += node.val
+#                 if node.left: que.append(node.left)
+#                 if node.right: que.append(node.right)
         
-        return total
+        # return total
+        
+        # aproach-2
+        que = [root]
+        while que:
+            prev = que
+            que = [child for node in que for child in [node.left, node.right] if child]
+        
+        return sum(node.val for node in prev)
