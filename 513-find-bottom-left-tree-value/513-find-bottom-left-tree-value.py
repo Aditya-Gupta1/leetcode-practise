@@ -7,16 +7,12 @@
 class Solution:
     def findBottomLeftValue(self, root: Optional[TreeNode]) -> int:
         que = [root]
-        prev = []
+        node = None
         
         while que:
             
-            prev = que.copy()
-            
-            for _ in range(len(que)):
-                node = que.pop(0)
-                
-                if node.left: que.append(node.left)
-                if node.right: que.append(node.right)
+            node = que.pop(0)
+            if node.right: que.append(node.right)
+            if node.left: que.append(node.left)
         
-        return prev[0].val
+        return node.val
