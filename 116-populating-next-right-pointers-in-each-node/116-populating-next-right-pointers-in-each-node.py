@@ -10,23 +10,33 @@ class Node:
 
 class Solution:
     def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        # DFS
         if not root: return None
-        if not root.left and not root.right: return root
-        
-        que = [root.left, root.right]
-        while que:
-            
-            currSize = len(que)
-            prevNode = que.pop(0)
-            
-            if prevNode.left: que.append(prevNode.left)
-            if prevNode.right: que.append(prevNode.right)
-            
-            for i in range(currSize-1):
-                nextNode = que.pop(0)
-                prevNode.next = nextNode
-                if nextNode.left: que.append(nextNode.left)
-                if nextNode.right: que.append(nextNode.right)
-                prevNode = nextNode
-
+        if root.left:
+            root.left.next = root.right
+            if root.next: root.right.next = root.next.left
+            self.connect(root.left)
+            self.connect(root.right)
         return root
+        
+        # BFS
+#         if not root: return None
+#         if not root.left and not root.right: return root
+        
+#         que = [root.left, root.right]
+#         while que:
+            
+#             currSize = len(que)
+#             prevNode = que.pop(0)
+            
+#             if prevNode.left: que.append(prevNode.left)
+#             if prevNode.right: que.append(prevNode.right)
+            
+#             for i in range(currSize-1):
+#                 nextNode = que.pop(0)
+#                 prevNode.next = nextNode
+#                 if nextNode.left: que.append(nextNode.left)
+#                 if nextNode.right: que.append(nextNode.right)
+#                 prevNode = nextNode
+
+#         return root
