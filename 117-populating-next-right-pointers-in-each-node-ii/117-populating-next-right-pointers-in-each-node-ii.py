@@ -11,7 +11,6 @@ class Node:
 class Solution:
     def connect(self, root: 'Node') -> 'Node':
         if not root: return root
-        if not root.left and not root.right: return root
         que = collections.deque([root])
         while que:
             curr_size = len(que)
